@@ -1,37 +1,87 @@
-## Welcome to GitHub Pages
+# Processos JHipster
+[JHipster](http://www.jhipster.tech/) é uma ferramenta pra desenvolvimento de aplicações web. A plataforma implementa um gerador de código [Yeoman](http://yeoman.io/) pra criar aplicações baseadas na arquitetura [Spring Boot](http://projects.spring.io/spring-boot/) + [AngularJS](https://angularjs.org/) ou [Angular](https://angular.io/).
 
-You can use the [editor on GitHub](https://github.com/utelemaco/jhipster-process/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
+Esse framework será utilizado nesse disciplina para exemplificar (e praticar) alguns processos de desenvolvimento de software. Escolhemos um conjunto de processos que, de forma simplificada, abordam os principais fluxos de desenvolvimento de uma aplicação web.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Serão cinco os processos que iremos utilizar:
++ Configurando o ambiente de desenvolvimento
++ Criando uma aplicação
++ Criando um CRUD simples
++ Criando um CRUD complexo
++ Alterando um CRUD
 
-### Markdown
+## Configurando o ambiente
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+Esse processo os setup inicial do ambiente de desenvolvimento. Para realizar esse processo é necessário realizar as seguintes atividades:
 
-```markdown
-Syntax highlighted code block
+1. Install Java 8 from the Oracle website.
+1. (Optional) Install a Java build tool (Maven).
+1. Install Git from git-scm.com. We recommend you also use a tool like SourceTree if you are starting with Git.
+1. Install Node.js from the Node.js website (prefer an LTS version)
+1. Install Yarn from the Yarn website
+1. Install Yeoman: `yarn global add yo`
+1. Only for AngularJS 1, install Bower: `yarn global add bower`
+1. Only for AngularJS 1, install Gulp: `yarn global add gulp-cli`
+1. Install JHipster: `yarn global add generator-jhipster`
 
-# Header 1
-## Header 2
-### Header 3
 
-- Bulleted
-- List
+![BPMN Processo 1](http://yuml.me/00ceb0b1)
 
-1. Numbered
-2. List
+## Criando uma aplicação (ou alterando as propriedades de uma aplicação)
 
-**Bold** and _Italic_ and `Code` text
+Esse processo é usado para criar uma nova aplicação ou alterar algumas propriedades da aplicação. Normalmente é executado no início do processo de desenvolvimento e envolve definir a arquitetura da aplicação. Para realizar esse processo é necessário realizar as seguintes atividades:
 
-[Link](url) and ![Image](src)
-```
+1. Se for uma nova aplicação, criar o diretório da aplicação `mkdir myApp && cd myApp` 
+1. Iniciar o gerador `jhipster`. O gerador irá fazer 15 perguntas (listadas abaixo):
+1. Forneça valores apropriados para as 15 perguntas (quando se aplicar, usar o valor default sugerido pelo gerador)
+1. Executar o comando `./mvnw`
+1. (Opcional) Executar o comando `gulp`
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+![BPMN Processo 2](http://yuml.me/eabd15ea)
 
-### Jekyll Themes
+## Criando um CRUD simples
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/utelemaco/jhipster-process/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+Esse processo é usado para criar um CRUD simples. Um CRUD é considerado simples quando o seu desenvolvimento pode ser feito a partir do próprio gerador `jhipster` (sem uso de uma modelagem de entidades). Normalmente os CRUDs dessa categoria são de Entidades com poucos atributos e associações. Para realizar esse processo é necessário realizar as seguintes atividades:
 
-### Support or Contact
+1. Sincronize o repositório de código local (faça o update e comite qualquer alteração)
+1. Execute o comando `jhipster entity <NOME_ENTIDADE> --[options]`
+1. Para cada atributo, forneça as seguintes informações: nome, tipo e regras para validação.
+1. Para cada associação, forneça as seguintes informações: entidade associada, nome e tipo da associação.
+1. O gerador irá fazer mais três perguntas , forneça a resposta default sugerida pelo gerador para as três.
+1. Resolva os conflitos se existirem (indicando se deseja sobrescrever ou manter o código atual)
+1. Reverta algumas alterações feitas pelo gerador (aquelas que sobrescrevem as alterações feitas pelo programador)
+1. Implemente as customizações necessárias (tradução de mensagens, regras de negócio, código de teste, etc)
+1. Faça o update do código e resolva os conflitos se existirem
+1. Valide os testes com o código integrado
+1. Comite as alterações
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+
+## Criando um CRUD complexo
+
+Esse processo é usado para criar um CRUD complexo. Um CRUD é considerado complexo quando o seu desenvolvimento requer o uso de uma ferramenta de modelagem. Normalmente os CRUDs dessa categoria são de Entidades com vários atributos e associações. Para realizar esse processo é necessário realizar as seguintes atividades:
+
+1. Desenhe o modelo no [JDL Studio](http://www.jhipster.tech/jdl-studio/)
+1. Faça o download do arquivo no diretório `.jhipster`
+1. Sincronize o repositório de código local (faça o update e comite qualquer alteração)
+1. Execute o comando `jhipster import-jdl .jhipster/<NOMEDOARQUIVO>`
+1. Resolva os conflitos se existirem (indicando se deseja sobrescrever ou manter o código atual)
+1. Reverta algumas alterações feitas pelo gerador (aquelas que sobrescrevem as alterações feitas pelo programador)
+1. Implemente as customizações necessárias (tradução de mensagens, regras de negócio, código de teste, etc)
+1. Faça o update do código e resolva os conflitos se existirem
+1. Valide os testes com o código integrado
+1. Comite as alterações
+
+
+## Alterando um CRUD
+
+Esse processo é usado para alterar um CRUD (simples ou complexo). Para realizar esse processo é necessário realizar as seguintes atividades:
+
+1. Altere o arquivo `.jhipster/<NOME_ENTIDADE>.json`
+1. Sincronize o repositório de código local (faça o update e comite qualquer alteração)
+1. Execute o comando `jhipster:entity <NOME_ENTIDADE> --regenerate` (`--skip-server` ou `--skip-client`)
+1. Resolva os conflitos se existirem (indicando se deseja sobrescrever ou manter o código atual)
+1. Reverta algumas alterações feitas pelo gerador (aquelas que sobrescrevem as alterações feitas pelo programador)
+1. Implemente as customizações necessárias (tradução de mensagens, regras de negócio, código de teste, etc)
+1. Faça o update do código e resolva os conflitos se existirem
+1. Valide os testes com o código integrado
+1. Comite as alterações
